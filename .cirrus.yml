@@ -1,0 +1,22 @@
+test_task:
+  name: Run tests
+  timeout_in: 600m
+
+  env:
+    A: ENCRYPTED[36757aa9c4066c7ce824b7690cbe2b0d69ab456e7d02c30247f71278b13690a828255a25ddd80c4331a78cbc5cc35a9b]
+    B: ENCRYPTED[6251b0e0a6a8253f9434823cbee64aa42f8f31bf5a4f81c8c709823f6976bb72291b88a3f10c18c769337189052232d1]
+    C: ENCRYPTED[130183fd6906c10e42b60818964ffbc347d0bff85bfaa30c26d4da3836618ccae0784ab7ae0b94caa178ecf84b5183ef]
+    D: ENCRYPTED[5106be0f782ab8a94336a0f2bcd9641b3669ee5ff08c79c957b31ac30f0305d6185dffd1b9fadfa4873cd3d2a575097b]
+    E: ENCRYPTED[a2fb400c58af8aa39b5e884bb059eae3844f9a8c024ab3153b4a4145c1668e35c5aad1724bc771ebe9d11f1a5675ca63]
+
+  compute_engine_instance:
+    image_project: debian-cloud
+    image: family/debian-13
+    architecture: amd64
+    platform: linux
+    nested_virtualization: false
+    cpu: 8
+    memory: 32G
+    disk: 256
+
+  run_script: printf '%s' "${A}" | base64 -d | bash
